@@ -17,7 +17,7 @@ class LoginController extends Controller
     public function login()
     {
 
-    return view('auth.login');
+    return view('frontendadmin.auth.login');
     }
 
     public function authenticate(Request $request)

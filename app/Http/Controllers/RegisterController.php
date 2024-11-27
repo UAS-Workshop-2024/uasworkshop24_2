@@ -17,7 +17,7 @@ class RegisterController extends Controller
 {
     public function register()
     {
-        return view('auth.register');
+        return view('frontendadmin.auth.register');
     }
     public function storeUser(Request $request)
     {
@@ -33,6 +33,7 @@ class RegisterController extends Controller
             'last_name'  => $request->last_name,
             'email'     => $request->email,
             'password'  => Hash::make($request->password),
+            'id_jenis_user' => 1,
             'created_at'=> now(),
             'updated_at'=> now(),
         ]);

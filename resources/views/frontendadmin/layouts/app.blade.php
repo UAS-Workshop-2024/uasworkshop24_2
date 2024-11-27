@@ -1,75 +1,35 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Dashboard')</title>
-    <style>
-        /* Tambahkan CSS di sini */
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-        }
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="../asetbaru/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../asetbaru/assets/img/favicon.png">
+    <title>
+        Airlangga Web
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <!-- Nucleo Icons -->
+    <link href="../asetbaru/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="../asetbaru/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="../asetbaru/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link id="pagestyle" href="../asetbaru/assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
 
-        .wrapper {
-            display: flex;
-            width: 100%;
-        }
-
-        .main-content {
-            flex: 1;
-            padding: 20px;
-            background: #fff;
-            min-height: 100vh;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        header p {
-            margin: 0;
-        }
-
-        header .logout {
-            text-decoration: none;
-            color: #fff;
-            background: #dc3545;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: background 0.3s ease;
-        }
-
-        header .logout:hover {
-            background: #c82333;
-        }
-
-        footer {
-            margin-top: auto;
-            text-align: center;
-            padding: 10px;
-            background: #f8f9fa;
-            border-top: 1px solid #ddd;
-        }
-    </style>
-    @stack('styles')
 </head>
-<body>
-    <div class="wrapper">
-        <!-- Include Sidebar -->
-        @include('frontendadmin.layouts.sidebar')
+<style>
+    .form-group[class*=has-icon-].has-icon-left .form-select {
+        padding-left: 2.5rem;
+    }
+</style>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            @yield('header')
-            @yield('content')
-        </div>
-    </div>
+<body>
+    @yield('content')
 </body>
+
 </html>

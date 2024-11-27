@@ -10,14 +10,12 @@ class JenisUser extends Model
     use HasFactory;
     protected $table = 'jenis_user';
     protected $primaryKey = 'id_jenis_user';
-    protected $guarded = [
-
-    ];
+    protected $guarded = [];
 
     public function settingsMenuUser()
-{
-    return $this->hasMany(SettingMenuUser::class, 'id_jenis_user');
-}
+    {
+        return $this->hasMany(SettingMenuUser::class, 'id_jenis_user');
+    }
     public function user()
     {
         return $this->hasMany(User::class, 'id_jenis_user', 'id_jenis_user');
