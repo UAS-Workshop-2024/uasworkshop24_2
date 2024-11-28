@@ -14,14 +14,14 @@ class OrderItems extends Model
 
     ];
 
-    public function Oi_order()
-    {
-        return $this->belongsTo(Order::class, 'order_id', 'id');
-    }
+    // public function Oi_order()
+    // {
+    //     return $this->belongsTo(Order::class, 'order_id', 'id');
+    // }
 
-    public function Oi_product()
-    {
-        return $this->belongsTo(Products::class, 'product_id', 'id');
-    }
+    // public function Oi_product()
+    // {
+    //     return $this->belongsTo(Products::class, 'product_id', 'id');
+    // }
 
 }

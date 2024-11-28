@@ -46,48 +46,8 @@ class User extends Authenticatable
         ];
     }
 
-    public function U_approvedby()
+    public function jenisUser()
     {
-        return $this->hasMany(Order::class, 'approved_by', 'id');
-    }
-
-    public function U_cancelledby()
-    {
-        return $this->hasMany(Order::class, 'cancelled_by', 'id');
-    }
-
-    public function U_order()
-    {
-        return $this->hasMany(Order::class, 'user_id', 'id');
-    }
-
-    public function U_product()
-    {
-        return $this->hasMany(Products::class, 'user_id', 'id');
-    }
-
-    public function U_shipment()
-    {
-        return $this->hasMany(Shipments::class, 'user_id', 'id');
-    }
-
-    public function U_shipment_by()
-    {
-        return $this->hasMany(Shipments::class, 'shipped_by', 'id');
-    }
-
-    public function U_slide()
-    {
-        return $this->hasMany(Slides::class, 'user_id', 'id');
-    }
-
-    public function U_wishlist()
-    {
-        return $this->hasMany(WishLists::class, 'user_id', 'id');
-    }
-
-    public function U_jenisu()
-    {
-        return $this->belongsTo(JenisUser::class, 'user_id', 'id');
+        return $this->belongsTo(JenisUser::class, 'id_jenis_user', 'id_jenis_user');
     }
 }

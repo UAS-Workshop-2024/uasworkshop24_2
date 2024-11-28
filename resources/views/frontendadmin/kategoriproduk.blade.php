@@ -11,7 +11,7 @@
         {{-- <span class="search-icon">🔍</span> --}}
         <input type="text" placeholder="Cari" class="search-input">
         {{-- <span class="filter-icon">⚙️</span> --}}
-      </div>      
+      </div>
 </header>
 @endsection
 
@@ -19,8 +19,8 @@
 <main>
     <div style="display: flex; justify-content: space-between; align-items: center;">
         <h2>Kategori Produk</h2>
-        <button>Tambah Kategori</button>    
-    </div> 
+        <button>Tambah Kategori</button>
+    </div>
     <table style="width: 100%; border-collapse: collapse;">
         <thead>
             <tr>

@@ -13,14 +13,42 @@ class Attributes extends Model
     protected $guarded = [
 
     ];
-
-    public function A_options()
+    public static function types()
     {
-        return $this->hasMany(AttributeOptions::class, 'attribute_id', 'id');
+        return [
+            'text' => 'Text',
+            'textarea' => 'Textarea',
+            'price' => 'Price',
+            'boolean' => 'Boolean',
+            'select' => 'Select',
+            'datetime' => 'Datetime',
+            'date' => 'Date',
+        ];
     }
 
-    public function A_PAV()
+    public static function booleanOptions()
     {
-        return $this->hasMany(ProductAttributeValues::class, 'attribute_id', 'id');
+        return [
+            1 => 'Yes',
+            0 => 'No',
+        ];
+    }
+
+    public static function validations()
+    {
+        return [
+            'number' => 'Number',
+            'decimal' => 'Decimal',
+            'email' => 'Email',
+            'url' => 'URL',
+        ];
+    }
+
+    public function attribute_options()
+    {
+        return $this->hasMany(AttributeOptions::class);
     }
 }
+
+
+

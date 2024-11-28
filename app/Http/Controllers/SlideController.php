@@ -1,0 +1,154 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Slides;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
+use App\Http\Requests\SlideRequest;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
+class SlideController extends Controller
+{
+    public function index()
+    {
+        $slides = Slides::orderBy('position', 'ASC')->get();
+
+        return view('frontendadmin.slides', compact('slides'));
+    }
+
+    public function moveUp($id)
+	{
+		$slide = Slides::findOrFail($id);
+
+		if (!$slide->prevSlide()) {
+			return redirect('a/slides');
+		}
+
+		DB::transaction(
+			function () use ($slide) {
+				$currentPosition = $slide->position;
+				$prevPosition = $slide->prevSlide()->position;
+
+				$prevSlide = Slides::find($slide->prevSlide()->id);
+				$prevSlide->position = $currentPosition;
+				$prevSlide->save();
+
+				$slide->position = $prevPosition;
+				$slide->save();
+			}
+		);
+
+		return redirect('/slides');
+    }
+
+    public function moveDown($id)
+	{
+		$slide = Slides::findOrFail($id);
+
+		if (!$slide->nextSlide()) {
+			Session::flash('error', 'Invalid position');
+			return redirect('/slides');
+		}
+
+		DB::transaction(
+			function () use ($slide) {
+				$currentPosition = $slide->position;
+				$nextPosition = $slide->nextSlide()->position;
+
+				$nextSlide = Slides::find($slide->nextSlide()->id);
+				$nextSlide->position = $currentPosition;
+				$nextSlide->save();
+
+				$slide->position = $nextPosition;
+				$slide->save();
+			}
+		);
+
+		return redirect('/slides');
+	}
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $statuses = Slides::STATUSES;
+
+        return view('admin.slides.create', compact('statuses'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(SlideRequest $request)
+    {
+
+        if($request->validated()){
+            $image = $request->file('path')->store('assets/slides', 'public');
+            Slides::create($request->except('path') + ['path' => $image,'position' => Slides::max('position') + 1, 'user_id' => Auth::user()->id]);
+        }
+
+		return redirect('admin/slides')->with([
+            'message' => 'berhasil di tambah !',
+            'alert-type' => 'success'
+        ]);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Slides $slide)
+    {
+        $statuses = Slides::STATUSES;
+
+		return view('frontendadmin.slides', compact('slide', 'statuses'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(SlideRequest $request, Slides $slide)
+    {
+        if($request->validated()) {
+            if($request->path){
+                File::delete('storage/'. $slide->path);
+                $image = $request->file('path')->store('assets/slides', 'public');
+                $slide->update($request->except('path') + ['path' => $image,'position' => Slides::max('position') + 1, 'user_id' => Auth::user()->id]);
+            }else {
+                $slide->update($request->validated() + ['position' => Slides::max('position') + 1, 'user_id' => Auth::user()->id]);
+            }
+        }
+
+		return redirect('/slides')->with([
+            'message' => 'berhasil di edit !',
+            'alert-type' => 'info'
+        ]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Slides $slide)
+    {
+        File::delete('storage/' . $slide->path);
+        $slide->delete();
+
+        return redirect()->back()->with([
+            'message' => 'berhasil di hapus !',
+            'alert-type' => 'danger'
+        ]);
+    }
+}
+

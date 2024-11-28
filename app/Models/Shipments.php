@@ -14,18 +14,11 @@ class Shipments extends Model
 
     ];
 
-    public function Sm_order()
-    {
-        return $this->belongsTo(Order::class, 'order_id', 'id');
-    }
+    public const PENDING = 'pending';
+    public const SHIPPED = 'shipped';
 
-    public function Sm_user()
-    {
-        return $this->belongsTo(User::class, 'user_id', 'id');
-    }
-
-    public function Sm_user_by()
-    {
-        return $this->belongsTo(User::class, 'shipped_by', 'id');
-    }
+    public function order()
+	{
+		return $this->belongsTo(Order::class);
+	}
 }
