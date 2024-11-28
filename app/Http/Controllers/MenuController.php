@@ -16,7 +16,7 @@ class MenuController extends Controller
         if (Auth::user()->id_jenis_user == 1) {
             $menu = DB::table('menu')->get();
 
-            return view('management.menu', compact('menu'));
+            return view('frontendadmin.managemenu', compact('menu'));
         } else {
             return redirect()->route('home');
         }

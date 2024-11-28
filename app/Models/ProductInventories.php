@@ -14,8 +14,24 @@ class ProductInventories extends Model
 
     ];
 
-    public function Pi_product()
-    {
-        return $this->belongsTo(Products::class, 'product_id', 'id');
-    }
+    public static function reduceStock($productId, $qty)
+	{
+		$inventory = self::where('product_id', $productId)->firstOrFail();
+
+		if ($inventory->qty < $qty) {
+			$product = Products::findOrFail($productId);
+			throw new \App\Exceptions\OutOfStockException('The product '. $product->sku .' is out of stock');
+		}
+
+		$inventory->qty = $inventory->qty - $qty;
+		$inventory->save();
+	}
+
+	public static function increaseStock($productId, $qty)
+	{
+		$inventory = self::where('product_id', $productId)->firstOrFail();
+		$inventory->qty = $inventory->qty + $qty;
+		$inventory->save();
+	}
 }
+

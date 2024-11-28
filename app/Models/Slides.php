@@ -14,8 +14,34 @@ class Slides extends Model
 
     ];
 
-    public function Sl_user()
-    {
-        return $this->hasMany(User::class, 'user_id', 'id');
+    public const ACTIVE = 'active';
+	public const INACTIVE = 'inactive';
+
+	public const STATUSES = [
+		self::ACTIVE => 'Active',
+		self::INACTIVE => 'Inactive',
+	];
+
+
+	public function scopeActive($query)
+	{
+		return $query->where('status', self::ACTIVE);
     }
+
+	public function prevSlide()
+	{
+		return self::where('position', '<', $this->position)
+			->orderBy('position', 'DESC')
+			->first();
+    }
+
+	public function nextSlide()
+	{
+		return self::where('position', '>', $this->position)
+			->orderBy('position', 'ASC')
+			->first();
+	}
 }
+
+
+

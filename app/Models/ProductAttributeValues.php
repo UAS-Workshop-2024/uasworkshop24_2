@@ -14,13 +14,15 @@ class ProductAttributeValues extends Model
 
     ];
 
-    public function Pav_attributes()
+    public static function getAttributeOptions($product, $attributeCode)
     {
-        return $this->belongsTo(Attributes::class, 'attribute_id', 'id');
-    }
+        $productVariantIDs = $product->variants->pluck('id');
+        $attribute = Attributes::where('code', $attributeCode)->first();
 
-    public function Pav_product()
-    {
-        return $this->belongsTo(Products::class, 'product_id', 'id');
+        $attributeOptions = ProductAttributeValues::where('attribute_id', $attribute->id)
+                            ->whereIn('product_id', $productVariantIDs)
+                            ->get();
+
+        return $attributeOptions;
     }
 }

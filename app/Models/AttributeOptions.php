@@ -14,8 +14,8 @@ class AttributeOptions extends Model
 
     ];
 
-    public function Ao_attribute()
+    public function attribute()
     {
-        return $this->belongsTo(Attributes::class, 'attribute_id', 'id');
+        return $this->belongsTo(Attributes::class);
     }
 }

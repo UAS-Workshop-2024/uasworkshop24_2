@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Image extends Model
+class ProductImage extends Model
 {
     use HasFactory;
     protected $table = 'image';
@@ -14,8 +14,8 @@ class Image extends Model
 
     public $timestamps = true;
 
-    public function I_product()
-    {
-        return $this->belongsTo(Products::class, 'product_id', 'id');
-    }
+    // public function I_product()
+    // {
+    //     return $this->belongsTo(Products::class, 'product_id', 'id');
+    // }
 }
