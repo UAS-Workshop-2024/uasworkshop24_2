@@ -73,3 +73,20 @@ Route::get('reports/revenue', [\App\Http\Controllers\ReportController::class, 'r
 Route::get('reports/product', [\App\Http\Controllers\ReportController::class, 'product'])->name('reports.product');
 Route::get('reports/inventory', [\App\Http\Controllers\ReportController::class, 'inventory'])->name('reports.inventory');
 Route::get('reports/payment', [\App\Http\Controllers\ReportController::class, 'payment'])->name('reports.payment');
+
+//USER
+// use App\Http\Controllers\ProductController;
+// use App\Http\Controllers\ProfileController;
+
+// Route::get('/jenis-product', [ProductController::class, 'index'])->name('jenis.product');
+// Route::get('/jenis-product/{id}', [ProductController::class, 'detailJenis'])->name('jenis.detail');
+// Route::get('/product/{id}', [ProductController::class, 'detailProduct'])->name('product.detail');
+// Route::get('/pembayaran', [ProductController::class, 'pembayaran'])->name('pembayaran');
+// Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
+
+// use App\Http\Controllers\PageController;
+
+// Route::get('/carts', [PageController::class, 'carts'])->name('user.frontend.carts');
+// Route::get('/orders', [PageController::class, 'orders'])->name('orders');
+// Route::get('/products', [PageController::class, 'products'])->name('user.frontend.detail_product');
+// Route::get('/wishlist', [PageController::class, 'wishlist'])->name('wishlist');
