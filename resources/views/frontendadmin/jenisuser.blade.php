@@ -4,6 +4,7 @@
 @endsection
 @section('content')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
     <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg">
         <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
             <div class="container-fluid py-1 px-3">
@@ -42,7 +43,7 @@
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
-                                <table class="table align-items-center mb-0">
+                                <table id="Menutable" class="table align-items-center mb-0">
                                     <thead>
                                         <tr>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ps-2">
@@ -141,6 +142,22 @@
 
         <!-- DataTables JS -->
         <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+        
+        <script>
+            $(document).ready(function () {
+                $('#Menutable').DataTable({
+                    "paging": true,       // Menampilkan pagination
+                    "searching": true,    // Menampilkan kotak pencarian
+                    "ordering": true,     // Mengaktifkan pengurutan kolom
+                    "info": true,         // Menampilkan informasi jumlah data
+                    "dom": 'Bfrtip',      // Menambahkan dom untuk buttons
+                    "buttons": [
+                        'copy', 'csv', 'excel', 'pdf', 'print'
+                    ]
+                });
+            });
+        </script>
+
 
         {{-- <script>
             $(document).ready(function () {

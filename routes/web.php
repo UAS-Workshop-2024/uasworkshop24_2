@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\FrontendUser\OrderUserController;
+use App\Http\Controllers\FrontendUser\PageController;
+use App\Http\Controllers\FrontendUser\PaymentController;
+use App\Http\Controllers\FrontendUser\ProductUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -75,6 +79,36 @@ Route::get('reports/inventory', [\App\Http\Controllers\ReportController::class, 
 Route::get('reports/payment', [\App\Http\Controllers\ReportController::class, 'payment'])->name('reports.payment');
 
 //USER
+//cart
+Route::get('/carts', [PageController::class, 'carts'])->name('carts');
+Route::post('cart/add-carts/{id}',[PageController::class, 'addtoCarts'])->name('cart.add');
+Route::post('carts/update-cart/{id}',[PageController::class, 'updateCart'])->name('cart.upate');
+Route::delete('cart/remove-cart/{id}', [PageController::class, 'removefromCart'])->name('cart.remove');
+Route::delete('cart/clear', [PageController::class, 'clearCart'])->name('cart.clear');
+
+//wishlist
+Route::get('/wishlist', [PageController::class, 'wishlist'])->name('wishlist');
+Route::post('wishlist/add-wish/{id}', [PageController::class, 'store'])->name('wishlist.store');
+Route::delete('/wishlist/clear', [PageController::class, 'destroy'])->name('wishlist.destroy');
+
+//order
+Route::get('/order', [OrderUserController::class, 'index'])->name('orders');
+Route::get('/orders/creta', [OrderUserController::class, 'create']);
+Route::post('/orders', [OrderUserController::class, 'store']);
+Route::get('/orders/{id}', [OrderUserController::class, 'show']);
+Route::get('/orders/{id}/edit', [OrderUserController::class, 'edit']);
+Route::put('/orders/update', [OrderUserController::class, 'update']);
+Route::delete('/orders/delete', [OrderUserController::class, 'destroy']);
+
+//product
+Route::resource('products', ProductUserController::class)->only(['index', 'show']);
+Route::get('products/jenis', [ProductUserController::class, 'jenis'])->name('products.jenis');
+Route::get('products/jenis/{id}', [ProductUserController::class, 'detailjenis'])->name('products.detailjenis');
+
+//payment
+Route::get('payments', [PaymentController::class, 'index'])->name('payments');
+Route::get('payments/{id}', [PaymentController::class, 'show'])->name('payments.show');
+
 // use App\Http\Controllers\ProductController;
 // use App\Http\Controllers\ProfileController;
 
