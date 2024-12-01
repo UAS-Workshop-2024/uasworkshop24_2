@@ -16,4 +16,10 @@ class HomeController extends Controller
 
         return view('home',compact('user'));
     }
+
+    public function admin()
+    {
+
+        return view('frontendadmin.dashboard', compact('admin'));
+    }
 }
