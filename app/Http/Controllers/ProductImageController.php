@@ -12,7 +12,7 @@ class ProductImageController extends Controller
 {
     public function index(Products $product)
     {
-        return view('frontendadmin.product_images.index', compact('product'));
+        return view('frontendadmin.product_image.index', compact('product'));
     }
 
     /**
@@ -20,7 +20,7 @@ class ProductImageController extends Controller
      */
     public function create(Products $product)
     {
-        return view('frontendadmin.product_images.create', compact('product'));
+        return view('frontendadmin.product_image.create', compact('product'));
     }
 
     /**
@@ -35,7 +35,7 @@ class ProductImageController extends Controller
             ProductImage::create(['path' => $path, 'product_id' => $product->id]);
         }
 
-        return redirect()->route('products.product_images.index', $product)->with([
+        return redirect()->route('admin.products.product_images.index', $product)->with([
             'message' => 'Berhasil di upload !',
             'alert-type' => 'success'
         ]);

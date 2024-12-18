@@ -8,11 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Attributes extends Model
 {
     use HasFactory;
-    protected $table = 'attributes';
-    protected $primaryKey = 'id';
-    protected $guarded = [
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    ];
     public static function types()
     {
         return [
@@ -46,7 +43,7 @@ class Attributes extends Model
 
     public function attribute_options()
     {
-        return $this->hasMany(AttributeOptions::class);
+        return $this->hasMany(AttributeOptions::class, 'attribute_id');
     }
 }
 

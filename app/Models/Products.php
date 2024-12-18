@@ -9,11 +9,10 @@ use Cviebrock\EloquentSluggable\Sluggable;
 class Products extends Model
 {
     use HasFactory, Sluggable;
-    protected $table = 'products';
-    protected $primaryKey = 'id';
-    protected $guarded = [
 
-    ];
+    protected $table = 'products';
+
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public const DRAFT = 0;
 	public const ACTIVE = 1;
@@ -66,7 +65,7 @@ class Products extends Model
 
 	public function categories()
 	{
-		return $this->belongsToMany(Categories::class, 'product_categories');
+		return $this->belongsToMany(Categories::class, 'product_categories' , 'product_id', 'category_id');
 	}
 
 	public function variants()
@@ -76,12 +75,12 @@ class Products extends Model
 
 	public function productInventory()
 	{
-		return $this->hasOne(productInventories::class);
+		return $this->hasOne(productInventories::class, 'product_id');
 	}
 
 	public function productImages()
 	{
-		return $this->hasMany(ProductImage::class)->orderBy('id', 'DESC');
+		return $this->hasMany(ProductImage::class, 'product_id')->orderBy('id', 'DESC');
 	}
 
 	public function scopeActive($query)

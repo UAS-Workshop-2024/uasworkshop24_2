@@ -4,266 +4,134 @@
 @endsection
 
 @section('content')
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-    <!-- Main content -->
-    <section class="content pt-4">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
+<main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
+        navbar-scroll="true">
+        <div class="container-fluid py-1 px-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a>
+                    </li>
+                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page"><a
+                            href="{{ route('admin.home') }}">Dashboard</a></li>
+                </ol>
+                <h6 class="font-weight-bolder mb-0">Menu Product</h6>
+            </nav>
+            <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                    <div class="input-group">
+                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" placeholder="Type here...">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Data Produk</h3>
-                <button type="button" class="btn btn-success shadow-sm float-right" data-toggle="modal" data-target="#createProductModal">
-                    <i class="fa fa-plus"></i> Tambah
-                  </button>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <div class="table-responsive">
-                    <table id="data-table" class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>SKU</th>
-                        <th>Tipe</th>
-                        <th>Nama Produk</th>
-                        <th>Harga</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($products as $product)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $product->sku }}</td>
-                                <td>{{ $product->type }}</td>
-                                <td>{{ $product->name }}</td>
-                                <td>{{ number_format($product->price) }}</td>
-                                <td>{{ $product->statusLabel() }}</td>
-                                <td>
+
+    <div class="container-fluid">
+        <div class="d-flex justify-content-end mb-3 mt-3">
+            <a  href="{{ route('admin.products.create')}}"  class="btn btn-primary btn-sm me-3">
+                Add New Data Product
+        </a>
+        </div>
+    </div>
+
+   <!-- Main content -->
+   <section class="content pt-4">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Data Produk</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <div class="table-responsive">
+                  <table id="data-table" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                      <th>No</th>
+                      <th>SKU</th>
+                      <th>Tipe</th>
+                      <th>Nama Produk</th>
+                      <th>Harga</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                      @forelse($products as $product)
+                          <tr>
+                              <td>{{ $loop->iteration }}</td>
+                              <td>{{ $product->sku }}</td>
+                              <td>{{ $product->type }}</td>
+                              <td>{{ $product->name }}</td>
+                              <td>{{ number_format($product->price) }}</td>
+                              <td>{{ $product->statusLabel() }}</td>
+                              <td>
                                 <div class="btn-group btn-group-sm">
-                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editProductModal" onclick="populateModal('{{ $product->id }}')">
-                                        <i class="fa fa-edit"></i> Edit
-                                    </button>
-                                    <form onclick="return confirm('are you sure !')" action="{{ route('admin.products.destroy', $product) }}"
-                                        method="POST">
+                                    <!-- Edit Icon -->
+                                    <a href="{{ route('admin.products.edit', $product) }}" class="me-2">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+
+                                    <!-- Delete Icon -->
+                                    <form onsubmit="return confirm('Are you sure?')" action="{{ route('admin.products.destroy', $product) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i></button>
+                                        <button type="submit" class="border-0 bg-transparent p-0">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
                                     </form>
                                 </div>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="7" class="text-center">Data Kosong !</td>
-                            </tr>
-                        @endforelse
-                        </tbody>
-                    </table>
-                </div>
+
+
+                              </td>
+                          </tr>
+                      @empty
+                          <tr>
+                              <td colspan="7" class="text-center">Data Kosong !</td>
+                          </tr>
+                      @endforelse
+                      </tbody>
+                  </table>
               </div>
-              <!-- /.card-body -->
             </div>
-            <!-- /.card -->
+            <!-- /.card-body -->
           </div>
-          <!-- /.col -->
+          <!-- /.card -->
         </div>
-        <!-- /.row -->
+        <!-- /.col -->
       </div>
-      <!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-
-    <!-- Modal Create Product -->
-<div class="modal fade" id="createProductModal" tabindex="-1" role="dialog" aria-labelledby="createProductModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <form method="POST" action="{{ route('admin.products.store') }}">
-          @csrf
-          <div class="modal-header">
-            <h5 class="modal-title" id="createProductModalLabel">Buat Produk</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="form-group row">
-              <label for="type" class="col-sm-2 col-form-label">Tipe Kategori</label>
-              <div class="col-sm-10">
-                <select class="form-control product-type" name="type" id="type">
-                  @foreach($types as $value => $type)
-                  <option {{ old('type') == $value ? 'selected' : null }} value="{{ $value }}"> {{ $type }}</option>
-                  @endforeach
-                </select>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="sku" class="col-sm-2 col-form-label">SKU</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" name="sku" value="{{ old('sku') }}" id="sku">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="name" class="col-sm-2 col-form-label">Nama Produk</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" name="name" value="{{ old('name') }}" id="name">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="category_id" class="col-sm-2 col-form-label">Kategori Produk</label>
-              <div class="col-sm-10">
-                <select class="form-control select-multiple" multiple="multiple" name="category_id[]" id="category_id">
-                  @foreach($categories as $category)
-                  <option {{ old('category_id') == $category->id ? 'selected' : null }} value="{{ $category->id }}"> {{ $category->name }}</option>
-                  @endforeach
-                </select>
-              </div>
-            </div>
-            <div class="configurable-attributes">
-              @if(count($configurable_attributes) > 0)
-              <p class="text-primary mt-4">Konfigurasi Attribute Produk</p>
-              <hr />
-              @foreach($configurable_attributes as $configurable_attribute)
-              <div class="form-group row">
-                <label for="{{ $configurable_attribute->code }}" class="col-sm-2 col-form-label">{{ $configurable_attribute->code }}</label>
-                <div class="col-sm-10">
-                  <select class="form-control select-multiple" multiple="multiple" name="{{ $configurable_attribute->code }}[]" id="{{ $configurable_attribute->code }}">
-                    @foreach($configurable_attribute->attribute_options as $attribute_option)
-                    <option value="{{ $attribute_option->id }}"> {{ $attribute_option->name }}</option>
-                    @endforeach
-                  </select>
-                </div>
-              </div>
-              @endforeach
-              @endif
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-success">Simpan</button>
-          </div>
-        </form>
-      </div>
+      <!-- /.row -->
     </div>
-  </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</main>
+@endsection
 
-  <!-- Modal Edit Product -->
-<div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="editProductModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <form method="POST" action="{{ route('admin.products.update', $product) }}">
-          @csrf
-          @method('put')
-
-          <div class="modal-header">
-            <h5 class="modal-title" id="editProductModalLabel">Edit Produk</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="form-group row">
-              <label for="type" class="col-sm-2 col-form-label">Tipe Kategori</label>
-              <div class="col-sm-10">
-                <select class="form-control" name="type" id="type">
-                  @foreach($types as $value => $type)
-                  <option {{ old('type', $product->type) == $value ? 'selected' : null }} value="{{ $value }}"> {{ $type }}</option>
-                  @endforeach
-                </select>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="sku" class="col-sm-2 col-form-label">SKU</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" name="sku" value="{{ old('sku', $product->sku) }}" id="sku">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="name" class="col-sm-2 col-form-label">Nama Produk</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" name="name" value="{{ old('name', $product->name) }}" id="name">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="category_id" class="col-sm-2 col-form-label">Kategori Produk</label>
-              <div class="col-sm-10">
-                <select class="form-control select-multiple" multiple="multiple" name="category_id[]" id="category_id">
-                  @foreach($categories as $category)
-                  <option {{ in_array($category->id, $product->categories->pluck('id')->toArray()) ? 'selected' : null }} value="{{ $category->id }}"> {{ $category->name }}</option>
-                  @endforeach
-                </select>
-              </div>
-            </div>
-
-            @if(!empty($configurable_attributes))
-            <p class="text-primary mt-4">Konfigurasi Attribute Produk</p>
-            <hr />
-            @foreach($configurable_attributes as $configurable_attribute)
-            <div class="form-group row">
-              <label for="{{ $configurable_attribute->code }}" class="col-sm-2 col-form-label">{{ $configurable_attribute->code }}</label>
-              <div class="col-sm-10">
-                <select class="form-control select-multiple" multiple="multiple" name="{{ $configurable_attribute->code }}[]" id="{{ $configurable_attribute->code }}">
-                  @foreach($configurable_attribute->attribute_options as $attribute_option)
-                  <option value="{{ $attribute_option->id }}" {{ in_array($attribute_option->id, old($configurable_attribute->code, [])) ? 'selected' : '' }}>
-                    {{ $attribute_option->name }}
-                  </option>
-                  @endforeach
-                </select>
-              </div>
-            </div>
-            @endforeach
-            @endif
-
-            <div class="form-group row">
-              <label for="short_description" class="col-sm-2 col-form-label">Deskripsi Singkat</label>
-              <div class="col-sm-10">
-                <textarea class="form-control" name="short_description" id="short_description" cols="30" rows="5">{{ old('short_description', $product->short_description) }}</textarea>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="description" class="col-sm-2 col-form-label">Deskripsi Produk</label>
-              <div class="col-sm-10">
-                <textarea class="form-control" name="description" id="description" cols="30" rows="5">{{ old('description', $product->description) }}</textarea>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="status" class="col-sm-2 col-form-label">Status</label>
-              <div class="col-sm-10">
-                <select class="form-control" name="status" id="status">
-                  @foreach($statuses as $value => $status)
-                  <option {{ old('status', $product->status) == $value ? 'selected' : null }} value="{{ $value }}"> {{ $status }}</option>
-                  @endforeach
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-success">Simpan</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  @endsection
 
 @push('style-alt')
-  <!-- DataTables -->
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css">
+<!-- DataTables -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css">
 @endpush
 
 @push('script-alt')
-    <script
-        src="https://code.jquery.com/jquery-3.6.3.min.js"
-        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
-        crossorigin="anonymous"
-    >
-    </script>
-    <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
-    <script>
-    $("#data-table").DataTable();
-    </script>
+  <script
+      src="https://code.jquery.com/jquery-3.6.3.min.js"
+      integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+      crossorigin="anonymous"
+  >
+  </script>
+  <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+  <script>
+  $("#data-table").DataTable();
+  </script>
 @endpush

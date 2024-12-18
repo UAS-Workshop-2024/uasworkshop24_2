@@ -8,9 +8,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class ProductCategory extends Model
 {
     use HasFactory;
-    protected $table = 'products';
-    protected $primaryKey = 'id';
-    protected $guarded = [
-
-    ];
+    
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 }

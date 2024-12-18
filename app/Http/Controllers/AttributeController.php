@@ -13,7 +13,7 @@ class AttributeController extends Controller
     {
         $attributes = Attributes::orderBy('name', 'ASC')->get();
 
-        return view('frontendadmin.attributes', compact('attributes'));
+        return view('frontendadmin.attributes.attributes', compact('attributes'));
     }
 
     public function create()
@@ -22,7 +22,7 @@ class AttributeController extends Controller
         $booleanOptions = Attributes::booleanOptions();
         $validations = Attributes::validations();
 
-        return view('frontendadmin.attributes', compact('types', 'booleanOptions', 'validations'));
+        return view('frontendadmin.attributes.create', compact('types', 'booleanOptions', 'validations'));
     }
 
     public function store(AttributeRequest $request)
@@ -41,14 +41,14 @@ class AttributeController extends Controller
         $booleanOptions = Attributes::booleanOptions();
         $validations = Attributes::validations();
 
-        return view('frontendadmin.attributes', compact('attribute','types','booleanOptions','validations'));
+        return view('frontendadmin.attributes.edit', compact('attribute','types','booleanOptions','validations'));
     }
 
     public function update(AttributeRequest $request, Attributes $attribute)
     {
         $attribute->update($request->validated());
 
-        return redirect()->route('frontendadmin.attributes')->with([
+        return redirect()->route('admin.attributes.index')->with([
             'message' => 'Berhasil di edit !',
             'alert-type' => 'info'
         ]);

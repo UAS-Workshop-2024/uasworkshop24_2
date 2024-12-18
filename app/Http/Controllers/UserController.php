@@ -19,7 +19,7 @@ class UserController extends Controller
                 ->get();
 
             $jenis_users = DB::table('jenis_user')->get();
-            return view('management.user', compact('users' , 'jenis_users'));
+            return view('frontendadmin.manageuser', compact('users' , 'jenis_users'));
         } else {
             return redirect()->route('home');
         }
@@ -50,7 +50,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('user.show')->with('success', 'Menu level created successfully.');
+        return redirect()->route('admin.user.show')->with('success', 'Menu level created successfully.');
     }
 
     public function update(Request $request, $id)
@@ -83,7 +83,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('user.show')->with('success', 'User updated successfully.');
+        return redirect()->route('admin.user.show')->with('success', 'User updated successfully.');
     }
 
     public function destroy($id)
@@ -92,9 +92,9 @@ class UserController extends Controller
 
         if ($user) {
             $user->delete();
-            return redirect()->route('user.show')->with('success', 'User deleted successfully.');
+            return redirect()->route('admin.user.show')->with('success', 'User deleted successfully.');
         } else {
-            return redirect()->route('user.show')->with('error', 'User not found.');
+            return redirect()->route('admin.user.show')->with('error', 'User not found.');
         }
     }
 

@@ -11,9 +11,9 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                         <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page"><a href="{{ route('home') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page"><a href="{{ route('admin.home') }}">Dashboard</a></li>
                     </ol>
-                    <h6 class="font-weight-bolder mb-0">Menu</h6>
+                    <h6 class="font-weight-bolder mb-0">Jenis User</h6>
                 </nav>
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -70,7 +70,7 @@
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#editModal-{{ $item->id_jenis_user }}">
                                                         <i class="bi bi-pencil-square" style="color: #6c757d;"></i>
                                                     </a>
-                                                    <a href="{{ route('jenisUser.destroy', $item->id_jenis_user) }}"
+                                                    <a href="{{ route('admin.jenisUser.destroy', $item->id_jenis_user) }}"
                                                        onclick="return confirm('Are you sure you want to delete it?')">
                                                         <i class="bi bi-trash" style="color: #6c757d;"></i>
                                                     </a>
@@ -85,7 +85,7 @@
                                                             <h5 class="modal-title" id="editModalLabel-{{ $item->id_jenis_user }}">Edit Menu</h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <form action="{{ route('jenisUser.update', $item->id_jenis_user) }}" method="POST">
+                                                        <form action="{{ route('admin.jenisUser.update', $item->id_jenis_user) }}" method="POST">
                                                             @csrf
                                                             <div class="modal-body">
                                                                 <div class="mb-3">
@@ -119,7 +119,7 @@
                         <h5 class="modal-title" id="createModalLabel">Add New Menu</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('jenisUser.store') }}" method="POST">
+                    <form action="{{ route('admin.jenisUser.store') }}" method="POST">
                         @csrf
                         <div class="modal-body">
                             <div class="mb-3">
@@ -142,7 +142,7 @@
 
         <!-- DataTables JS -->
         <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-        
+
         <script>
             $(document).ready(function () {
                 $('#Menutable').DataTable({

@@ -17,7 +17,9 @@ class SlideController extends Controller
     {
         $slides = Slides::orderBy('position', 'ASC')->get();
 
-        return view('frontendadmin.slides', compact('slides'));
+        $statuses = Slides::STATUSES;
+
+        return view('frontendadmin.slides', compact('slides', 'statuses'));
     }
 
     public function moveUp($id)
@@ -25,7 +27,7 @@ class SlideController extends Controller
 		$slide = Slides::findOrFail($id);
 
 		if (!$slide->prevSlide()) {
-			return redirect('a/slides');
+			return redirect('admin/slides');
 		}
 
 		DB::transaction(
@@ -42,7 +44,7 @@ class SlideController extends Controller
 			}
 		);
 
-		return redirect('/slides');
+		return redirect('admin/slides');
     }
 
     public function moveDown($id)
@@ -51,7 +53,7 @@ class SlideController extends Controller
 
 		if (!$slide->nextSlide()) {
 			Session::flash('error', 'Invalid position');
-			return redirect('/slides');
+			return redirect('admin/slides');
 		}
 
 		DB::transaction(
@@ -68,18 +70,18 @@ class SlideController extends Controller
 			}
 		);
 
-		return redirect('/slides');
+		return redirect('admin/slides');
 	}
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        $statuses = Slides::STATUSES;
+    // public function create()
+    // {
+    //     $statuses = Slides::STATUSES;
 
-        return view('admin.slides.create', compact('statuses'));
-    }
+    //     return view('frontendadmin.slides', compact('statuses'));
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -131,7 +133,7 @@ class SlideController extends Controller
             }
         }
 
-		return redirect('/slides')->with([
+		return redirect('admin/slides')->with([
             'message' => 'berhasil di edit !',
             'alert-type' => 'info'
         ]);

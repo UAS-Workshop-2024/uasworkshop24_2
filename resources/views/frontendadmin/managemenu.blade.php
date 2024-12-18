@@ -13,7 +13,7 @@
                     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                         <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
                         <li class="breadcrumb-item text-sm text-dark active" aria-current="page"><a
-                                href="{{ route('home') }}">Dashboard</a></li>
+                                href="{{ route('admin.home') }}">Dashboard</a></li>
                     </ol>
                     <h6 class="font-weight-bolder mb-0">Menu</h6>
                 </nav>
@@ -185,10 +185,10 @@
                             tableBody.empty();
 
                             $.each(menu, function(index, item) {
+                                console.log(item);
                                 let row = `
                                 <tr>
                                     <td><p class="text-sm font-weight-bold mb-0">${item.menu_id}</p></td>
-                                    <td><p class="text-sm font-weight-bold mb-0">${item.id_level}</p></td>
                                     <td><p class="text-sm font-weight-bold mb-0">${item.menu_name}</p></td>
                                     <td><p class="text-sm font-weight-bold mb-0">${item.menu_link}</p></td>
                                     <td><p class="text-sm font-weight-bold mb-0">${item.menu_icon}</p></td>

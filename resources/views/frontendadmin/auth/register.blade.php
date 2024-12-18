@@ -9,7 +9,7 @@
                 <div class="card-header text-center"><h4>Register Admin</h4></div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('admin.register') }}">
                         @csrf
                         <div class="form-group">
                             <label for="first_name">First Name:</label>

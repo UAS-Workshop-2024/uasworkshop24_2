@@ -8,14 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class AttributeOptions extends Model
 {
     use HasFactory;
-    protected $table = 'attribute_options';
-    protected $primaryKey = ' id';
-    protected $guarded = [
 
-    ];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function attribute()
     {
-        return $this->belongsTo(Attributes::class);
+        return $this->belongsTo(Attributes::class, 'attribute_id');
     }
 }

@@ -18,7 +18,7 @@ class ShipmentController extends Controller
 			->whereRaw('orders.deleted_at IS NULL')
 			->orderBy('shipments.created_at', 'DESC')->get();
 
-		return view('frontendadmin.shipments', compact('shipments'));
+		return view('frontendadmin.shipments.index', compact('shipments'));
     }
 
     /**
@@ -50,7 +50,7 @@ class ShipmentController extends Controller
      */
     public function edit(Shipments $shipment)
     {
-        return view('frontendadmin.shipments', compact('shipment'));
+        return view('frontendadmin.shipments.edit', compact('shipment'));
     }
 
     /**
@@ -81,7 +81,7 @@ class ShipmentController extends Controller
 		);
 
 		Session::flash('success', 'The shipment has been updated');
-		return redirect('/orders/'. $order->id);
+		return redirect('admin/orders/'. $order->id);
     }
 
     /**

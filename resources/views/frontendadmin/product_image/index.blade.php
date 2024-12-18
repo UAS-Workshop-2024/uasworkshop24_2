@@ -4,8 +4,8 @@
 @endsection
 
 @section('content')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-    <!-- Main content -->
     <section class="content pt-4">
       <div class="container-fluid">
         <div class="row">
@@ -38,14 +38,17 @@
                                   </a>
                                 </td>
                                 <td>
-                                <div class="btn-group btn-group-sm">
-                                    <form onclick="return confirm('are you sure !')" action="{{ route('admin.products.product_images.destroy', [$product, $productImage]) }}"
-                                        method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i></button>
-                                    </form>
-                                </div>
+                                    <div class="btn-group btn-group-sm">
+                                        <!-- Delete Icon -->
+                                        <form onsubmit="return confirm('Are you sure?')" action="{{ route('admin.products.product_images.destroy', [$product, $productImage]) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="border-0 bg-transparent p-0">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+
                                 </td>
                             </tr>
                         @empty

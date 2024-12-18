@@ -11,7 +11,7 @@
       <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
                  <li class="nav-item" class="active">
-                    <a class="nav-link {{ Request::routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
+                    <a class="nav-link {{ Request::routeIs('admin.home') ? 'active' : '' }}" href="{{ route('admin.home') }}">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="20px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                           <title>Home</title>
@@ -54,7 +54,7 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item" class="active">
+            {{-- <li class="nav-item" class="active">
                 <a class="nav-link {{ Request::routeIs('profile.show') ? 'active' : '' }}" href="{{ route('profile.show') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     <svg width="12px" height="20px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -73,7 +73,7 @@
                   </div>
                   <span class="nav-link-text ms-1">Profile</span>
                 </a>
-              </li>
+              </li> --}}
             @php
                 $user = Auth::user();
                 $menus = $user->jenisUser->menus;
@@ -83,8 +83,8 @@
               <li class="nav-item">
             <a class="nav-link {{ Request::routeIs($menu->menu_link) ? 'active' : '' }}" id="dashboard-link" href="{{ route($menu->menu_link) }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                <img src="{{ asset('/images/'. $menu->menu_icon) }}" class="avatar avatar-sm me-3" alt="{{ $menu->menu_icon }}">
-                <img src="{{ $menu->menu_icon }}" class="avatar avatar-sm me-3" alt="{{ $menu->menu_icon }}" width="12px" height="20px" viewBox="0 0 40 40">
+                {{-- <img src="{{ asset('/images/'. $menu->menu_icon) }}" class="avatar avatar-sm me-3" alt="{{ $menu->menu_icon }}">
+                <img src="{{ $menu->menu_icon }}" class="avatar avatar-sm me-3" alt="{{ $menu->menu_icon }}" width="12px" height="20px" viewBox="0 0 40 40"> --}}
                 <svg width="12px" height="20px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <title>{{ $menu->menu_name }}</title>
                   <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -104,7 +104,7 @@
           </li>
           @endforeach
                   <li class="nav-item">
-                    <a class="nav-link  " href="{{ route('logout') }}">
+                    <a class="nav-link  " href="{{ route('admin.logout') }}">
                       <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="20px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                           <title>Log Out</title>

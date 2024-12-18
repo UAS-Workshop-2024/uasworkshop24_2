@@ -14,7 +14,7 @@ class MenuController extends Controller
     public function index()
     {
         if (Auth::user()->id_jenis_user == 1) {
-            $menu = DB::table('menu')->get();
+            $menu = Menu::all();
 
             return view('frontendadmin.managemenu', compact('menu'));
         } else {
@@ -40,7 +40,7 @@ class MenuController extends Controller
             'create_by' =>  Auth::user()->id,
         ]);
 
-        return redirect()->route('menu.show')->with('success', 'Menu created successfully.');
+        return redirect()->route('admin.menu.show')->with('success', 'Menu created successfully.');
     }
 
     public function update(Request $request, $id)
@@ -61,13 +61,13 @@ class MenuController extends Controller
         $menu->create_by = Auth::user()->id;
         $menu->save();
 
-        return redirect()->route('menu.show')->with('success', 'Menu updated successfully.');
+        return redirect()->route('admin.menu.show')->with('success', 'Menu updated successfully.');
     }
 
     public function destroy($id)
     {
         Menu::destroy($id);
 
-        return redirect()->route('menu.show')->with('success', 'Menu deleted successfully.');
+        return redirect()->route('admin.menu.show')->with('success', 'Menu deleted successfully.');
     }
 }

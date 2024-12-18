@@ -33,11 +33,11 @@ class LoginController extends Controller
 
         if ($user && Hash::check($request->password, $user->password)) {
             Auth::loginUsingId($user->id);
-            return redirect()->intended('home')
+            return redirect()->intended('admin/home')
                 ->with('success', 'Anda berhasil login');
         }
 
-        return redirect()->route('login')
+        return redirect()->route('admin.login')
             ->with('error', 'Email atau password salah');
     }
 
@@ -48,6 +48,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect('/admin/login');
     }
 }

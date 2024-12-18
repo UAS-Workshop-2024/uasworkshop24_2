@@ -10,18 +10,12 @@ class WishLists extends Model
     use HasFactory;
     protected $table = 'wish_lists';
     protected $primaryKey = 'id';
-    protected $guarded = [
 
-    ];
+    protected $guarded = ['id'];
 
-    public function W_product()
-    {
-        return $this->belongsTo(Products::class, 'product_id', 'id');
-    }
-
-    public function W_user()
-    {
-        return $this->belongsTo(User::class, 'user_id', 'id');
-    }
+    public function product()
+	{
+		return $this->belongsTo(Products::class);
+	}
 
 }

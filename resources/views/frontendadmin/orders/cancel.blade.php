@@ -4,6 +4,8 @@
 @endsection
 
 @section('content')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
 <div class="content pt-4">
     <div class="row">
         <div class="col-lg-6">
@@ -21,7 +23,7 @@
                     </div>
                     <div class="form-footer pt-5 border-top">
                         <button type="submit" class="btn btn-success">Cancel Order</button>
-                        <a href="{{ url('admin/orders') }}" class="btn btn-dark">Kembali</a>
+                        <a href="{{ url('orders') }}" class="btn btn-dark">Kembali</a>
                     </div>
                     </form>
                 </div>

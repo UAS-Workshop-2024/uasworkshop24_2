@@ -4,8 +4,8 @@
 @endsection
 
 @section('content')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-    <!-- Main content -->
     <section class="content pt-4">
       <div class="container-fluid">
         <div class="row">
@@ -18,7 +18,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <form method="post" action="{{ route('admin.attributes.attribute_options.update', [$attribute, $attribute_option]) }}">
+                <form method="post" action="{{ route('admin.attributes.attribute_options.update', [$attribute->id, $attribute_option->id]) }}">
                     @csrf
                     @method('put')
                     <div class="form-group row border-bottom pb-4">

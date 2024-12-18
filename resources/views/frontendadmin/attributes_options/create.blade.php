@@ -4,8 +4,8 @@
 @endsection
 
 @section('content')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-    <!-- Main content -->
     <section class="content pt-4">
       <div class="container-fluid">
         <div class="row">

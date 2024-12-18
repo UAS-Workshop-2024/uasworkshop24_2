@@ -36,18 +36,18 @@ class OrderController extends Controller
 
 		if ($startDate && !$endDate) {
 			Session::flash('error', 'The end date is required if the start date is present');
-			return redirect('admin/orders');
+			return redirect('orders');
 		}
 
 		if (!$startDate && $endDate) {
 			Session::flash('error', 'The start date is required if the end date is present');
-			return redirect('admin/orders');
+			return redirect('orders');
 		}
 
 		if ($startDate && $endDate) {
 			if (strtotime($endDate) < strtotime($startDate)) {
 				Session::flash('error', 'The end date should be greater or equal than start date');
-				return redirect('admin/orders');
+				return redirect('orders');
 			}
 
 			$order = $orders->whereRaw("DATE(order_date) >= ?", $startDate)
@@ -56,7 +56,7 @@ class OrderController extends Controller
 
         $orders = $orders->get();;
 
-		return view('admin.orders.index', compact('orders','statuses'));
+		return view('frontendadmin.orders.index', compact('orders','statuses'));
     }
 
     /**
@@ -82,7 +82,7 @@ class OrderController extends Controller
 	{
 		$order = Order::withTrashed()->findOrFail($id);
 
-		return view('admin.orders.show', compact('order'));
+		return view('frontendadmin.orders.show', compact('order'));
 	}
 
     /**
@@ -119,7 +119,7 @@ class OrderController extends Controller
 					return true;
 				}
 			);
-			return redirect('admin/orders/trashed');
+			return redirect('orders/trashed');
 		} else {
 			$canDestroy = DB::transaction(
 				function () use ($order) {
@@ -135,14 +135,14 @@ class OrderController extends Controller
 				}
 			);
 
-			return redirect('admin/orders');
+			return redirect('orders');
 		}
 	}
 
 
     public function cancel(Order $order)
 	{
-		return view('admin.orders.cancel', compact('order'));
+		return view('frontendadmin.orders.cancel', compact('order'));
     }
 
     public function doCancel(Request $request, Order $order)
@@ -174,13 +174,13 @@ class OrderController extends Controller
 
 		// \Session::flash('success', 'The order has been cancelled');
 
-		return redirect('admin/orders');
+		return redirect('orders');
 	}
 
     public function doComplete(Request $request,Order $order)
 	{
 		if (!$order->isDelivered()) {
-			return redirect('admin/orders');
+			return redirect('orders');
 		}
 
 		$order->status = Order::COMPLETED;
@@ -188,7 +188,7 @@ class OrderController extends Controller
 		$order->approved_at = now();
 
 		if ($order->save()) {
-			return redirect('admin/orders');
+			return redirect('orders');
 		}
 	}
 
@@ -196,7 +196,7 @@ class OrderController extends Controller
 	{
 		$orders = Order::onlyTrashed()->latest()->get();
 
-		return view('admin.orders.trashed', compact('orders'));
+		return view('frontendadmin.orders.trashed', compact('orders'));
 	}
 
 	public function restore($id)
@@ -226,9 +226,9 @@ class OrderController extends Controller
 		);
 
 		if ($canRestore) {
-			return redirect('admin/orders');
+			return redirect('orders');
 		} else {
-			return redirect('admin/orders/trashed');
+			return redirect('orders/trashed');
 		}
 	}
 }

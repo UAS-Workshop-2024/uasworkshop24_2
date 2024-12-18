@@ -39,3 +39,6 @@ Route::post('/createKategori', [App\Http\Controllers\JenisUserController::class,
 Route::put('/kategori/{id}', [App\Http\Controllers\JenisUserController::class, 'update']);
 Route::delete('/kategori/{id}', [App\Http\Controllers\JenisUserController::class, 'destroy']);
 
+// Route::post('testpembayaran', [\App\Http\Controllers\FrontendUser\PaymentController::class, 'testpembayaran']);
+
+Route::post('payments/notification', [\App\Http\Controllers\FrontendUser\PaymentController::class, 'notification']);

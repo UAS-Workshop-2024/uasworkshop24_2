@@ -28,7 +28,7 @@ class MenuUserController extends Controller
             $jenis_users = JenisUser::all();
             $menus = Menu::all();
 
-            return view('management.menuuser', compact('setting_menu_user', 'menus', 'jenis_users'));
+            return view('frontendadmin.menuuser', compact('setting_menu_user', 'menus', 'jenis_users'));
         } else {
             return redirect()->route('home');
         }
@@ -47,7 +47,7 @@ class MenuUserController extends Controller
             'create_by' =>  Auth::user()->id,
         ]);
 
-        return redirect()->route('menuUser.show')->with('success', 'Menu User created successfully.');
+        return redirect()->route('admin.menuUser.show')->with('success', 'Menu User created successfully.');
     }
 
     public function update(Request $request, $id)
@@ -65,7 +65,7 @@ class MenuUserController extends Controller
             'create_by' => Auth::user()->id,
         ]);
 
-        return redirect()->route('menuUser.show')->with('success', 'Menu User updated successfully.');
+        return redirect()->route('admin.menuUser.show')->with('success', 'Menu User updated successfully.');
     }
 
     public function destroy($id)
@@ -73,7 +73,7 @@ class MenuUserController extends Controller
         $setting_menu_user = SettingMenuUser::findOrFail($id);
         $setting_menu_user->delete();
 
-        return redirect()->route('menuUser.show')->with('success', 'Menu User deleted successfully.');
+        return redirect()->route('admin.menuUser.show')->with('success', 'Menu User deleted successfully.');
     }
 
 }

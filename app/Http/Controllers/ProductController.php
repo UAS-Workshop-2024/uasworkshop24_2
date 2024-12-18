@@ -33,7 +33,7 @@ class ProductController extends Controller
         $types = Products::types();
         $configurable_attributes = $this->_getConfigurableAttributes();
 
-        return view('admin.products.create', compact('categories', 'types', 'configurable_attributes'));
+        return view('frontendadmin.products.create', compact('categories', 'types', 'configurable_attributes'));
     }
 
     private function _getConfigurableAttributes()
@@ -160,7 +160,7 @@ class ProductController extends Controller
         $types = Products::types();
         $configurable_attributes = $this->_getConfigurableAttributes();
 
-        return view('admin.products.edit', compact('product','categories','statuses','types','configurable_attributes'));
+        return view('frontendadmin.products.edit', compact('product','categories','statuses','types','configurable_attributes'));
     }
 
     private function _updateProductVariants($request)

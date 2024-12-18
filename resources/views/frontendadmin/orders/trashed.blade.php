@@ -4,6 +4,8 @@
 @endsection
 
 @section('content')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
     <div class="content pt-4">
         <div class="row">
             <div class="col-lg-12">

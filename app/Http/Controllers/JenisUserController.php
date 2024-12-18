@@ -16,7 +16,7 @@ class JenisUserController extends Controller
                 ->where('delete_mark', 0)
                 ->get();
 
-            return view('management.jenisuser', compact('jenis_users'));
+            return view('frontendadmin.jenisuser', compact('jenis_users'));
         } else {
             return redirect()->route('home');
         }
@@ -31,7 +31,7 @@ class JenisUserController extends Controller
 
         JenisUser::create($validatedData);
 
-        return redirect()->route('jenisUser.show')
+        return redirect()->route('admin.jenisUser.show')
                          ->with('success', 'Jenis User created successfully.');
     }
 
@@ -49,7 +49,7 @@ class JenisUserController extends Controller
 
         $jenisUser->update($validatedData);
 
-        return redirect()->route('jenisUser.show')
+        return redirect()->route('admin.jenisUser.show')
                          ->with('success', 'Jenis User updated successfully.');
     }
 
@@ -58,6 +58,6 @@ class JenisUserController extends Controller
         $jenis_users = JenisUser::findOrFail($id);
         $jenis_users->delete();
 
-        return redirect()->route('jenisUser.show')->with('success', 'Menu User deleted successfully.');
+        return redirect()->route('admin.jenisUser.show')->with('success', 'Menu User deleted successfully.');
     }
 }
